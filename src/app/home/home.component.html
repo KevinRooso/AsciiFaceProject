@@ -1,0 +1,50 @@
+<div class="overlay" *ngIf="!productLoaded">
+  <div class="center">
+      <mat-progress-spinner diameter=50 
+                          mode="indeterminate" 
+                color="primary">
+    </mat-progress-spinner> 
+  </div>
+  </div>
+
+    <div class="bottom" *ngIf="scrollLoad">
+        <mat-progress-spinner diameter=50 
+                            mode="indeterminate" 
+                  color="primary">
+      </mat-progress-spinner> 
+    </div>
+
+
+<div class="container-fluid my-4 p-4">
+    <div class="row mb-2">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+            <mat-form-field appearance="fill">
+                <mat-label>Sorting</mat-label>
+                <mat-select (selectionChange)="sortProducts($event)">
+                  <mat-option *ngFor="let sort of sorts" [value]="sort.value">
+                    {{sort.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+    </div>
+    <div class="row m-4 mbrow">
+        <div class="col-md-3 my-3" *ngFor="let prod of products">
+            <div class="card rounded shadow-sm border-0">
+                <p class="card-header red face-size" [ngStyle]="{'font-size': prod.size+'px' }">{{prod.face}}</p>
+                <div class="card-body">
+                <p class="card-text"><i>{{prod.size}} px</i></p>
+                <h5 class="text-dark price-size my-2">${{prod.price}}</h5>
+                <p class="small text-muted text-right">{{getModifiedDate(prod.date)}}</p>                                                                                        
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+<div class="jumbotron jumbotron-fluid mb-4" *ngIf="products.length == allProducts.length">
+  <div class="container">
+    <h1 class="display-4 text-center">~ end of catalogue ~</h1>    
+  </div>
+</div>
